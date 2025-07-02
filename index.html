@@ -4,260 +4,236 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manicure Elegance</title>
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Inline Styles -->
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
-    /* Reset & Base */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Reset */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
+    body { font-family:'Poppins', sans-serif; color:#444; background:#f9f7f6; }
+    h1,h2,h3,h4,h5 { color:#222; }
+    a { text-decoration:none; color:inherit; }
 
-    /* Variables */
     :root {
-      --gold: #D4AF7F;
-      --light: #F2E7E1;
+      --primary-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      --accent: #e98074;
+      --light-bg: #ffffff;
+      --dark-text: #222;
     }
 
-    /* Header */
-    .header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); z-index: 10; }
-    .header__wrapper { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
-    .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; }
-    .nav { }
-    .nav__list { display: flex; gap: 1.5rem; }
-    .nav__link { font-weight: 600; position: relative; }
-    .nav__link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width .3s; }
-    .nav__link:hover::after, .is-active::after { width: 100%; }
-    .btn { padding: .5rem 1rem; border-radius: 50px; font-weight: 600; cursor: pointer; }
-    .btn--primary { background: var(--gold); color: #fff; transition: transform .3s; }
-    .btn--primary:hover { transform: scale(1.05); }
+    /* HEADER */
+    header { position:fixed; top:0; width:100%; background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); z-index:100; animation:slideDown .6s ease;
+    }
+    .container { max-width:1200px; margin:0 auto; padding:0 1rem; }
+    .nav-wrapper { display:flex; align-items:center; justify-content:space-between; height:60px; }
+    .logo { font-family:'Great Vibes', cursive; font-size:1.8rem; color:var(--accent); }
+    nav ul { display:flex; gap:2rem; }
+    nav li { list-style:none; }
+    nav a { position:relative; font-weight:600; padding:0.5rem; }
+    nav a::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--accent); transition:0.3s; }
+    nav a:hover::after { width:100%; }
+    .btn-primary { background:var(--primary-gradient); color:#fff; padding:0.6rem 1.5rem; border:none; border-radius:50px; font-weight:600; transition:transform .3s, box-shadow .3s; }
+    .btn-primary:hover { transform:scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.1); }
 
-    /* Hero */
-    .hero { position: relative; height: 100vh; background: url('https://source.unsplash.com/1600x900/?manicure') center/cover no-repeat; }
-    .hero__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
-    .hero__content { position: relative; z-index: 1; max-width: 800px; margin: auto; padding: 0 1rem; text-align: center; color: #fff; top: 50%; transform: translateY(-50%); }
-    .hero__title { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 1s ease forwards; opacity: 0; }
-    .hero__subtitle { font-size: 1.25rem; margin-bottom: 1.5rem; animation: fadeInUp 1.2s ease forwards; opacity: 0; }
-    .hero__cta { animation: fadeInUp 1.4s ease forwards; opacity: 0; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from {transform:translateY(-100%);} to {transform:translateY(0);} }
 
-    /* Sections */
-    section { padding: 4rem 1rem; }
-    .section-title { text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 2rem; }
+    /* HERO */
+    .hero { height:100vh; background:url('https://source.unsplash.com/1600x900/?manicure,beauty') center/cover no-repeat; position:relative; display:flex; align-items:center; }
+    .hero::before { content:''; position:absolute; inset:0; background:var(--primary-gradient); opacity:0.6; }
+    .hero-content { position:relative; z-index:1; text-align:center; width:100%; }
+    .hero-content h1 { font-size:3rem; color:#fff; animation:fadeIn 1s ease forwards; opacity:0; }
+    .hero-content p { margin:1rem 0; color:#fafafa; font-size:1.2rem; animation:fadeIn 1.4s ease forwards; opacity:0; }
+    .hero-content .btn-primary { animation:fadeIn 1.8s ease forwards; opacity:0; }
+    @keyframes fadeIn { to { opacity:1; } }
 
-    /* About */
-    .about__content { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; max-width: 1200px; margin: auto; }
-    .about__photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; }
-    .about__text { flex: 1; }
-    .about__advantages { margin-top: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+    /* SECTIONS */
+    section { padding:6rem 0; }
+    .section-title { text-align:center; font-size:2.5rem; margin-bottom:2rem; position:relative; }
+    .section-title::after { content:''; width:60px; height:4px; background:var(--accent); display:block; margin:1rem auto 0; border-radius:2px; }
 
-    /* Services */
-    .services__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem; max-width: 1200px; margin: auto; }
-    .card { background: var(--light); padding: 1.5rem; border-radius: 12px; text-align: center; transition: transform .3s, box-shadow .3s; }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .card__price { margin-top: 1rem; font-weight: 600; }
+    /* ABOUT */
+    #about .inner { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:2rem; max-width:1000px; margin:auto; }
+    #about img { width:100%; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+    #about .text p { font-size:1.1rem; line-height:1.6; }
+    #about .advantages { display:flex; gap:1.5rem; margin-top:1.5rem; }
+    #about .advantages div { background:var(--light-bg); padding:1rem; border-radius:12px; flex:1; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.05); transition:transform .3s; }
+    #about .advantages div:hover { transform:translateY(-5px); }
 
-    /* Portfolio */
-    .portfolio__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1rem; max-width: 1200px; margin: auto; }
-    .portfolio__grid img { width: 100%; border-radius: 12px; transition: transform .3s; }
-    .portfolio__grid img:hover { transform: scale(1.05); }
+    /* SERVICES */
+    #services .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:2rem; max-width:1000px; margin:auto; }
+    .card { background:var(--light-bg); border-radius:20px; padding:2rem; text-align:center; box-shadow:0 12px 25px rgba(0,0,0,0.1); transition:transform .3s, box-shadow .3s; }
+    .card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+    .card h3 { margin-bottom:1rem; color:var(--accent); }
+    .card p { line-height:1.5; }
+    .card .price { margin-top:1.5rem; font-size:1.2rem; font-weight:600; color:var(--dark-text); }
 
-    /* Testimonials */
-    .testimonials__slider { overflow: hidden; max-width: 600px; margin: auto; }
-    .testimonial { padding: 2rem; text-align: center; display: none; }
-    .testimonial.active { display: block; }
-    blockquote { font-style: italic; margin-bottom: 1rem; }
-    cite { display: block; font-weight: 600; }
+    /* PORTFOLIO */
+    #portfolio .grid { column-count:2; column-gap:1rem; max-width:900px; margin:auto; }
+    #portfolio img { width:100%; margin-bottom:1rem; border-radius:20px; transition:transform .3s; }
+    #portfolio img:hover { transform:scale(1.05); }
 
-    /* Contact */
-    .form, .newsletter { max-width: 500px; margin: 1.5rem auto; background: var(--light); padding: 2rem; border-radius: 12px; }
-    .form label { display: block; margin-bottom: 1rem; }
-    .form input, .form select, .form button { width: 100%; padding: .75rem; border: none; border-radius: 8px; margin-top: .5rem; }
-    .form__submit { margin-top: 1rem; }
-    .form--inline { display: flex; gap: .5rem; }
-    .form--inline input { flex: 1; }
+    /* TESTIMONIALS */
+    #testimonials .slider { max-width:600px; margin:auto; position:relative; }
+    .testimonial { display:none; text-align:center; }
+    .testimonial.active { display:block; animation:fadeIn 1s ease; }
+    .testimonial blockquote { font-size:1.1rem; font-style:italic; margin-bottom:1rem; }
+    .testimonial cite { font-weight:600; color:var(--accent); }
 
-    /* Footer */
-    .footer { background: #222; color: #fff; padding: 2rem 1rem; }
-    .footer__wrapper { max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
-    .footer address p, .footer a { margin-bottom: .5rem; }
-    .social a { margin-right: 1rem; }
+    /* CONTACT */
+    #contact .form { max-width:600px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    #contact .form label { display:flex; flex-direction:column; }
+    #contact .form input, #contact .form select, #contact .form button { padding:1rem; border-radius:8px; border:1px solid #ddd; font-size:1rem; }
+    #contact .form button { grid-column:1/-1; background:var(--primary-gradient); color:#fff; border:none; font-weight:600; transition:background .3s; }
+    #contact .form button:hover { background:var(--accent); }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav__list { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; background: #fff; flex-direction: column; padding-top: 4rem; gap: 1rem; transition: right .3s; }
-      .nav.open .nav__list { right: 0; }
-      .nav-toggle { display: block; }
+    /* FOOTER */
+    footer { background:#222; color:#fff; padding:3rem 0; }
+    footer .footer-inner { max-width:1000px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:2rem; }
+    footer address, footer .social { flex:1; }
+    footer a { color:#fff; }
+
+    /* RESPONSIVO */
+    @media (max-width:768px) {
+      #about .inner, #contact .form { grid-template-columns:1fr; }
+      nav ul { display:none; }
+      .nav-toggle { display:block; background:none; border:none; font-size:1.5rem; }
+      nav.open ul { display:flex; flex-direction:column; gap:1rem; background:#fff; position:absolute; top:60px; right:1rem; padding:1rem; box-shadow:0 10px 20px rgba(0,0,0,0.1); }
     }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header__wrapper">
-      <h1 class="logo">Manicure Elegance</h1>
-      <button class="nav-toggle" aria-label="Abrir menu">☰</button>
-      <nav class="nav" aria-label="Menu principal">
-        <ul class="nav__list">
-          <li><a href="#hero" class="nav__link is-active">Início</a></li>
-          <li><a href="#about" class="nav__link">Sobre</a></li>
-          <li><a href="#services" class="nav__link">Serviços</a></li>
-          <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
-          <li><a href="#testimonials" class="nav__link">Depoimentos</a></li>
-          <li><a href="#contact" class="nav__link">Contato</a></li>
+  <header>
+    <div class="container nav-wrapper">
+      <div class="logo">Manicure Elegance</div>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <nav>
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#testimonials">Depoimentos</a></li>
+          <li><a href="#contact">Contato</a></li>
         </ul>
       </nav>
-      <a href="#contact" class="btn btn--primary">Agende sua Sessão</a>
+      <a href="#contact" class="btn-primary">Agende</a>
     </div>
   </header>
 
-  <!-- HERO -->
   <section id="hero" class="hero">
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <h2 class="hero__title">Descubra a Beleza das Suas Unhas</h2>
-      <p class="hero__subtitle">Design sofisticado | Técnicas de ponta | Atendimento personalizado</p>
-      <a href="#contact" class="btn btn--primary hero__cta">Agendar Agora</a>
+    <div class="hero-content container">
+      <h1>Seus Sonhos de Unhas Perfeitas</h1>
+      <p>Inovação, elegância e cuidado em cada detalhe.</p>
+      <a href="#contact" class="btn-primary">Agendar Agora</a>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="about">
+  <section id="about">
     <h2 class="section-title">Sobre Mim</h2>
-    <div class="about__content">
-      <img src="https://source.unsplash.com/400x400/?manicure,beauty" alt="Foto da manicure Maria Silva" class="about__photo">
-      <div class="about__text">
-        <p>Olá! Sou <strong>Maria Silva</strong>, manicure há mais de 8 anos, especializada em alongamento, gel e nail art. Priorizo higiene impecável, técnicas modernas e atendimento personalizado.</p>
-        <ul class="about__advantages">
-          <li>✅ Higienização Premium</li>
-          <li>✅ Esmaltação em Gel de longa duração</li>
-          <li>✅ Nail Art Exclusiva e Criativa</li>
-        </ul>
+    <div class="inner container">
+      <img src="https://source.unsplash.com/500x500/?manicure" alt="Maria Silva">
+      <div class="text">
+        <p>Olá! Sou <strong>Maria Silva</strong>, especialista em manicure e nail art com mais de 8 anos de experiência. Minha paixão é transformar unhas em verdadeiras obras de arte, sempre prezando pela qualidade e higiene.</p>
+        <div class="advantages">
+          <div>Higienização Premium</div>
+          <div>Esmaltação em Gel</div>
+          <div>Nail Art Exclusiva</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="services">
+  <section id="services">
     <h2 class="section-title">Serviços</h2>
-    <div class="services__grid">
-      <article class="card">
-        <h3 class="card__title">Manicure Tradicional</h3>
-        <p>Cuidados essenciais para unhas saudáveis e bem cuidadas.</p>
-        <p class="card__price">R$ 50,00</p>
-      </article>
-      <article class="card">
-        <h3 class="card__title">Gel Nails</h3>
-        <p>Esmaltação duradoura com cura em lâmpada UV.</p>
-        <p class="card__price">R$ 120,00</p>
-      </article>
-      <article class="card">
-        <h3 class="card__title">Alongamento de Unhas</h3>
-        <p>Unhas resistentes e com acabamento perfeito.</p>
-        <p class="card__price">R$ 150,00</p>
-      </article>
-      <article class="card">
-        <h3 class="card__title">Nail Art</h3>
-        <p>Designs exclusivos para cada estilo.</p>
-        <p class="card__price">R$ 80,00</p>
-      </article>
+    <div class="grid container">
+      <div class="card">
+        <h3>Manicure Tradicional</h3>
+        <p>Cuidados básicos e elegância clássica.</p>
+        <div class="price">R$50,00</div>
+      </div>
+      <div class="card">
+        <h3>Gel Nails</h3>
+        <p>Brilho intenso e durabilidade superior.</p>
+        <div class="price">R$120,00</div>
+      </div>
+      <div class="card">
+        <h3>Alongamento de Unhas</h3>
+        <p>Unhas longas e resistentes.</p>
+        <div class="price">R$150,00</div>
+      </div>
+      <div class="card">
+        <h3>Nail Art</h3>
+        <p>Arte personalizada em cada detalhe.</p>
+        <div class="price">R$80,00</div>
+      </div>
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
-  <section id="portfolio" class="portfolio">
+  <section id="portfolio">
     <h2 class="section-title">Portfolio</h2>
-    <div class="portfolio__grid">
-      <img src="https://source.unsplash.com/400x500/?nails,design1" alt="Design 1" loading="lazy">
-      <img src="https://source.unsplash.com/400x500/?nails,design2" alt="Design 2" loading="lazy">
-      <img src="https://source.unsplash.com/400x500/?nails,design3" alt="Design 3" loading="lazy">
-      <img src="https://source.unsplash.com/400x500/?nails,design4" alt="Design 4" loading="lazy">
+    <div class="grid container">
+      <img src="https://source.unsplash.com/400x400/?nails,design1" alt="Design 1">
+      <img src="https://source.unsplash.com/400x400/?nails,design2" alt="Design 2">
+      <img src="https://source.unsplash.com/400x400/?nails,design3" alt="Design 3">
+      <img src="https://source.unsplash.com/400x400/?nails,design4" alt="Design 4">
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="testimonials">
+  <section id="testimonials">
     <h2 class="section-title">Depoimentos</h2>
-    <div class="testimonials__slider">
-      <div class="testimonial active" role="region">
-        <blockquote>"Excelente atendimento! Minhas unhas nunca estiveram tão lindas."</blockquote>
-        <cite>Ana, São Paulo</cite>
+    <div class="slider container">
+      <div class="testimonial active">
+        <blockquote>"O melhor atendimento que já recebi!"</blockquote>
+        <cite>– Ana, SP</cite>
       </div>
-      <div class="testimonial" role="region">
-        <blockquote>"Profissionalismo e criatividade no atendimento."</blockquote>
-        <cite>Beatriz, Rio de Janeiro</cite>
+      <div class="testimonial">
+        <blockquote>"Unhas impecáveis e atendimento impecável."</blockquote>
+        <cite>– Beatriz, RJ</cite>
       </div>
-      <div class="testimonial" role="region">
-        <blockquote>"Amei o resultado! Recomendo a todos."</blockquote>
-        <cite>Camila, Salvador</cite>
+      <div class="testimonial">
+        <blockquote>"Recomendo para quem busca excelência."</blockquote>
+        <cite>– Camila, BA</cite>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
+  <section id="contact">
     <h2 class="section-title">Agende sua Sessão</h2>
-    <form class="form" novalidate>
-      <label>Serviço<select required><option value="">Selecione</option><option>Manicure Tradicional</option><option>Gel Nails</option><option>Alongamento de Unhas</option><option>Nail Art</option></select></label>
-      <label>Data<input type="date" required></label>
-      <label>Horário<input type="time" required></label>
-      <label>Nome<input type="text" required></label>
-      <label>WhatsApp<input type="tel" required></label>
-      <label>E-mail<input type="email" required></label>
-      <button type="submit" class="btn btn--primary form__submit">Confirmar Reserva</button>
+    <form class="form container">
+      <select required><option value="" disabled selected>Escolha o Serviço</option><option>Manicure Tradicional</option><option>Gel Nails</option><option>Alongamento de Unhas</option><option>Nail Art</option></select>
+      <input type="date" required>
+      <input type="time" required>
+      <input type="text" placeholder="Seu Nome" required>
+      <input type="tel" placeholder="WhatsApp" required>
+      <input type="email" placeholder="E-mail" required>
+      <button type="submit" class="btn-primary">Confirmar Reserva</button>
     </form>
-    <div class="newsletter">
-      <h3>Newsletter</h3>
-      <p>Receba dicas de cuidados e ofertas exclusivas no seu e-mail</p>
-      <form class="form form--inline" novalidate>
-        <label class="sr-only" for="newsletter-email">E-mail</label>
-        <input id="newsletter-email" type="email" placeholder="Seu E-mail" required>
-        <button type="submit" class="btn btn--secondary">Inscrever-se</button>
-      </form>
-    </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__wrapper">
+  <footer>
+    <div class="footer-inner container">
       <address>
-        <p>Rua das Flores, 123, Bairro Jardim, Cidade XYZ</p>
-        <p>WhatsApp: <a href="https://wa.me/5511999999999">(11) 99999-9999</a></p>
-        <p>E-mail: <a href="mailto:contato@manicureelegance.com">contato@manicureelegance.com</a></p>
+        <p>Rua das Flores, 123 – Jardim</p>
+        <p><a href="https://wa.me/5511999999999">WhatsApp: (11) 99999-9999</a></p>
+        <p><a href="mailto:contato@manicureelegance.com">contato@manicureelegance.com</a></p>
       </address>
-      <div class="social">📷 Instagram&nbsp;👍 Facebook&nbsp;🎵 TikTok</div>
+      <div class="social">
+        <a href="#">Instagram</a> |
+        <a href="#">Facebook</a> |
+        <a href="#">TikTok</a>
+      </div>
     </div>
   </footer>
 
-  <!-- Inline Scripts -->
   <script>
     // Mobile menu
-    const navToggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.nav');
-    navToggle.addEventListener('click', () => nav.classList.toggle('open'));
-
-    // Testimonials slider
-    let idx = 0;
-    const slides = document.querySelectorAll('.testimonial');
-    setInterval(() => {
-      slides[idx].classList.remove('active');
-      idx = (idx + 1) % slides.length;
-      slides[idx].classList.add('active');
-    }, 5000);
-
-    // Scroll reveal
-    const reveal = (elements, options={threshold:0.2}) => {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting && e.target.classList.add('reveal-visible'));
-      }, options);
-      elements.forEach(el => { el.classList.add('reveal'); obs.observe(el); });
-    };
-    document.addEventListener('DOMContentLoaded', () => {
-      reveal(document.querySelectorAll('section, .card, .testimonial'));
-    });
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    
+    // Testimonials rotation
+    let i=0; const items=document.querySelectorAll('.testimonial');
+    setInterval(()=>{ items[i].classList.remove('active'); i=(i+1)%items.length; items[i].classList.add('active'); },4000);
   </script>
 </body>
 </html>
